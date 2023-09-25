@@ -1,11 +1,11 @@
 
-# Setup Docker Para API de Doação de Sangue
+# Setup Docker Para Sistema de Assinatura
 
 
 ### Passo a passo
 Clone Repositório
 ```sh
-git clone https://github.com/odenilsonmarques/app-api-doe-sangue.git
+git clone https://github.com/odenilsonmarques/app-subscription
 ```
 
 Copie os arquivos docker-compose.yml, Dockerfile e o diretório docker/ para o seu projeto
@@ -20,28 +20,6 @@ cd app-laravel/
 Crie o Arquivo .env
 ```sh
 cp .env.example .env
-```
-
-
-Atualize as variáveis de ambiente do arquivo .env
-```dosini
-APP_NAME="app-doe-sangue"
-APP_URL=http://localhost/8389
-
-DB_CONNECTION=mysql
-DB_HOST=db
-DB_PORT=3306
-DB_DATABASE=db_api_doe_sague
-DB_USERNAME=root
-DB_PASSWORD=root
-
-CACHE_DRIVER=redis
-QUEUE_CONNECTION=redis
-SESSION_DRIVER=redis
-
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
 ```
 
 
@@ -70,4 +48,4 @@ php artisan key:generate
 
 
 Acessar o projeto
-[http://localhost:8389](http://localhost:8389)
+[http://localhost:8289](http://localhost:8289)
