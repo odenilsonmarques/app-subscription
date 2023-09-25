@@ -1,0 +1,57 @@
+version: "3.7"
+
+services:
+    # image custom project
+    app_subscription:
+        build:
+            args:
+                user: odenilson
+                uid: 1000
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+        networks:
+            - net-app-subscription
+
+    # nginx
+    nginx:
+        image: nginx:alpine
+        restart: always
+        ports: 
+            - "8289:80"
+        volumes: 
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks: 
+            - net-app-subscription
+
+    # db mysql
+    mysql:
+        image: mysql:5.7.22
+        restart: always
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        volumes:
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports:
+            - "3184:3306"
+        networks:
+            - net-app-subscription
+
+    # redis
+    redis:
+        image: redis:latest
+        networks:
+            - net-app-subscription
+
+networks:
+    net-app-subscription:
+        driver: bridge
