@@ -30,7 +30,10 @@ class SubscriptionController extends Controller
     // Metodo para rdirecionar para página de checkout
     public function checkout()
     {
-        return view('subscriptions.checkout');
+        return view('subscriptions.checkout',[
+            // declarando uma variavel intent que recupera o usuario autenticado e chama o metod createSetupIntennt do stripe. Despoi é preciso pegar essa variavel na view, e nesse caso declaramos no botao
+            'intent' => auth()->user()->createSetupIntent(),
+        ]);
     }
 
     //chama a view premium
