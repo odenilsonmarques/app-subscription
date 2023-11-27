@@ -28,8 +28,12 @@ class SubscriptionController extends Controller
 
 
     // Metodo para rdirecionar para página de checkout
-    public function checkout()
-    {
+    public function checkout(){
+
+        // caso o usuario for assinante este é redirecionado para o premium, caso nao for vai para pagina checkout
+        if(auth()->user()->subscribed('default'))
+            return redirect()->route('subscriptions.premium');
+
         return view('subscriptions.checkout',[
             // declarando uma variavel intent que recupera o usuario autenticado e chama o metod createSetupIntennt do stripe. Despoi é preciso pegar essa variavel na view, e nesse caso declaramos no botao
             'intent' => auth()->user()->createSetupIntent(),
@@ -39,6 +43,10 @@ class SubscriptionController extends Controller
     //chama a view premium
     public function premium()
     {
+        // caso o usuario nao for assinante este é redirecionado para o checkout, caso for vai para pagina premiun
+        if(!auth()->user()->subscribed('default'))
+            return redirect()->route('subscriptions.checkout');
+        
         return view('subscriptions.premium');
     }
 
