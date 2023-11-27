@@ -21,7 +21,7 @@
                         </div>
                        
                         <div class="col-span-6 sm:col-span-4 py-2">
-                            {{-- essa div é chamada pelo script abaixo para nomtar alguns dados do cartao --}}
+                            {{-- essa div é chamada pelo script abaixo para montar alguns dados do cartao --}}
                             <div id="card-element" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"></div>
                         </div>
                         
@@ -47,7 +47,7 @@
     const cardElement = elements.create('card'); 
     cardElement.mount("#card-element");
 
-    // pegando os dados de agamento
+    // pegando os dados de pagamento
     const form = document.getElementById('form')
     const cardHolderName = document.getElementById('card-holder-name')
     const cardButton = document.getElementById('card-button')
@@ -74,10 +74,19 @@
         if(error){
             alert('Erro')
             console.log(error)
-        }else{
-            alert('deu certo')
-            console.log(setupIntent)
+
+            return;
         }
+
+        // gerando assinatura com os dados do token e passando os dados em novo input
+        let token = document.createElement('input')
+        token.setAttribute('type','hidden')
+        token.setAttribute('name', 'token')//pasando o mesmo nome que foi definido no controller
+        token.setAttribute('value',setupIntent.payment_method)
+        form.appendChild(token)//colocando  input dento dp form
+
+        form.submit()//submentendo o form considerando que tudo deu certo
+
     })
 
 

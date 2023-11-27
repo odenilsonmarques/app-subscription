@@ -22,7 +22,7 @@ class SubscriptionController extends Controller
                 ->newSubscription('default', 'price_1NwmxHKgIIEG85eD7N7B3Gnv')
                 ->create($request->token);
 
-        // depois que o usuário criar a assinatura ele vai ser direcionado para uma agina premium, como exemplo
+        // depois que o usuário criar a assinatura ele vai ser direcionado para uma pagina premium, como exemplo
         return redirect()->route('subscriptions.premium');
     }
 
