@@ -43,9 +43,7 @@ class SubscriptionController extends Controller
     //chama a view premium
     public function premium()
     {
-        // caso o usuario nao for assinante este é redirecionado para o checkout, caso for vai para pagina premiun
-        if(!auth()->user()->subscribed('default'))
-            return redirect()->route('subscriptions.checkout');
+        
         
         return view('subscriptions.premium');
     }

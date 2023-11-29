@@ -20,7 +20,7 @@ Route::post('subscriptons/store',[SubscriptionController::class, 'store'])->name
 
 Route::get('subscriptons/checkout',[SubscriptionController::class, 'checkout'])->name('subscriptions.checkout');
 
-Route::get('subscriptons/premium',[SubscriptionController::class, 'premium'])->name('subscriptions.premium');
+Route::get('subscriptons/premium',[SubscriptionController::class, 'premium'])->name('subscriptions.premium')->middleware('subscribed');
 
 
 
