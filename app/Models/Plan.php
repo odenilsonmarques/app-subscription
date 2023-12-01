@@ -13,4 +13,10 @@ class Plan extends Model
     {
         return $this->hasMany(Feature::class);
     }
+
+    // mutator para formatar o price
+    public function getPriceBrAtribute()
+    {
+        return number_format($this->price, 2, ',', '.');
+    }
 }

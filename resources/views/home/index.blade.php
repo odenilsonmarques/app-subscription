@@ -23,7 +23,8 @@
 
             @include('home._partials.features')
 
-            @include('home._partials.plans')
+            nesse caso como os arquivos estao separado dessa forma, passa-se aqui os planos vindo do controler
+            @include('home._partials.plans',['plans'=>$plans])
 
             @include('home._partials.contact')
         </main>

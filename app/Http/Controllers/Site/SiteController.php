@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Plan;
 
 class SiteController extends Controller
 {
-    public function home()
+    public function home(Plan $plan)
     {
-        return view('home.index');
+        // pegando os planos e suas features
+        $plans = $plan->with('features')->get();
+        return view('home.index',compact('plans'));
     }
 }
