@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Subscriptions\SubscriptionController;
+use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,16 +18,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('subscriptons/store',[SubscriptionController::class, 'store'])->name('subscriptions.store');
 
-
 Route::get('subscriptons/checkout',[SubscriptionController::class, 'checkout'])->name('subscriptions.checkout');
 
 Route::get('subscriptons/premium',[SubscriptionController::class, 'premium'])->name('subscriptions.premium')->middleware('subscribed');
 
+Route::get('subscriptons/account',[SubscriptionController::class, 'account'])->name('subscriptions.account');//rota para exibir as view com assinaturas
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('subscriptons/invoice/{id}',[SubscriptionController::class, 'downloadInvoice'])->name('subscriptions.invoice.download');
+
+Route::get('/',[SiteController::class, 'home'])->name('site.home');
+
+
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
